@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import RecipeCard from './components/RecipeCard';
 import './App.css';
 
 class App extends Component {
   constructor(props){
     super(props); 
       this.state = {
-        meal: ""
+        meal: {}
       }
     }
     componentDidMount(){
-      const url = 'https://www.themealdb.com/api/json/v1/1/latest.php';
+      const URL = 'https://www.themealdb.com/api/json/v1/1/latest.php';
       axios.get(URL)
       .then(res => {
         const meal = res.data.meals; //mealdata
@@ -24,9 +25,10 @@ class App extends Component {
     }
   
   render() {
+    var data = this.state.meal;
     return (
       <div className="App">
-       <h1>HIIII</h1>
+        {data.length > 0 && <RecipeCard meals={data} /> }
 
       </div>
     );
